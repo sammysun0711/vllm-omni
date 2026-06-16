@@ -120,6 +120,317 @@ LABEL_TO_TASK = {
     TASK_IMAGE_UND: "x2t_image",
 }
 
+# Gradio presets for **Image Generation** (t2i): listed first, then any rows
+# from upstream ``config/examples/t2i_example.json`` when ``--examples-root`` is set.
+CURATED_T2I_EXAMPLE_PROMPTS: tuple[str, ...] = (
+    (
+        "The image depicts exactly 3 foxes and exactly 3 small lanterns in a snowy pine forest. "
+        "Each fox sits beside one glowing orange lantern, forming a strict one-to-one arrangement "
+        "with no extra foxes or lanterns. Snow crystals, warm light, pine branches, and blue winter "
+        "shadows create strong visual contrast and a clean countable composition."
+    ),
+    (
+        "A premium elemental transformation sheet featuring the same horse statue in four elemental forms. "
+        "Top-left: the horse statue rendered as fire, with streaming flames, and flying sparks. "
+        "Top-right: the same horse statue rendered as ice, with translucent ice crystals and sharp frozen edges. "
+        "Bottom-left: the same horse statue rendered as gold, with rich golden metal, and mirror-like highlights. "
+        "Bottom-right: the same horse statue rendered as wood, with carved timber grain, and polished fibers."
+    ),
+    (
+        'Five translucent potion bottles on a wooden picnic table in a garden. Each contains a different '
+        'glowing color, with front tags reading "L", "A", "N", "C", "E" left to right. Dew, flowers, and '
+        "blurred greenery make the scene fresh and cinematic."
+    ),
+)
+
+# Gradio presets for **Video Generation** (t2v): listed first, then any rows from
+# upstream ``config/examples/t2v_example.json`` when ``--examples-root`` is set.
+# (User list skipped number 9; entries below are prompts 1–8 and 10.)
+CURATED_T2V_EXAMPLE_PROMPTS: tuple[str, ...] = (
+    (
+        "A medium-close shot shows a red panda wearing a gold-trimmed cap and travel satchel on a bright "
+        "seaside wave with a painted surfboard, foam spray, and a glowing summer sky. Subject fills frame; "
+        "premium detail, clear focus, lively eyes, readable motion. tracking shot. It rides the wave, lifts "
+        "one paw in balance, and laughs as spray catches the light."
+    ),
+    (
+        "A premium animated-film shot shows a brass robot playing violin in a lantern-lit city square with one "
+        "puppy seated nearby under warm evening light. The main subject occupies at least two-thirds of the "
+        "frame and remains the clear visual focus. The scene is whimsical, beautiful, and richly detailed, with "
+        "strong character focus and elegant atmosphere. fixed shot. The robot draws the bow in smooth arcs "
+        "while the puppy listens quietly."
+    ),
+    (
+        "A medium-close shot shows a Persian cat wearing ornate spectacles and a velvet academic robe inside a "
+        "candlelit salon with carved shelves, chandeliers, and mosaic floors. The cat fills the frame with "
+        "crisp fur detail and lively eyes. fixed shot. It lifts a slender magic wand and traces a soft glowing "
+        "arc through the air."
+    ),
+    (
+        "A cinematic landscape shot shows a tropical coastline at sunset with pink sky, moving waves, black "
+        "rocks, and palms swaying in warm wind. The scene is majestic, highly aesthetic, and rich in layered "
+        "natural detail, with refined atmosphere and premium scenic clarity. wide shot. The sun sinks toward "
+        "the horizon while wave foam advances and retreats along the shore."
+    ),
+    (
+        "A close-to-medium cinematic shot shows a handsome motorcyclist riding a classic black motorcycle along "
+        "a coastal road with cliffs, sea spray, and dramatic sky. The background stays bright, layered, and "
+        "aesthetically refined, with luminous depth and elegant environmental variation while remaining "
+        "secondary to the main subject. The eyes are lively and expressive, with subtle blinking, natural gaze "
+        "shifts, and gentle movement in the brows and mouth that keep the face vivid on camera. The subject is "
+        "beautiful, highly detailed, and photographed with a premium cinematic aesthetic. The subject occupies "
+        "at least two-thirds of the frame, with beautiful styling, refined facial detail, convincing skin "
+        "texture, and anatomically correct hands. The rider's body posture matches the bike's motion and the "
+        "hands grip the handlebars naturally. The camera follows from the side as the motorcycle leans through "
+        "a curve."
+    ),
+    (
+        "A detailed cinematic portrait begins from a medium view and gradually moves into a close facial framing "
+        "of a beautiful young woman shaping clay on a pottery wheel in a bright ceramic workshop with sunlit "
+        "shelves, bowls, and hanging tools. The person is the dominant subject in the frame, styled with a "
+        "tied-back apron, delicate earrings, rolled sleeves, and a simple pendant, and shown with premium skin "
+        "detail, expressive eyes, subtle brow and cheek motion, anatomically convincing hands, and rich costume "
+        "texture. Her hands guide the spinning clay in one smooth controlled motion as her expression moves from "
+        "serene focus into a soft smile. Her gaze starts on the camera, follows the clay, briefly rises toward the "
+        "window light, and returns to the lens while her head inclines naturally with the wheel."
+    ),
+    (
+        "A detailed cinematic portrait begins from a medium view and gradually moves into a close facial framing "
+        "of a beautiful young woman playing a grand piano in a luminous marble music hall with tall windows, "
+        "gold sconces, flowing curtains, polished floors, and refined floral arrangements. Styled with pearl "
+        "earrings, a delicate crystal hairpin, and a layered silver necklace above an elegant satin gown. "
+        "Subject dominates; sharp face, open eyes, subtle micro-expressions, correct visible hands. Both hands "
+        "stay clearly visible on the piano keys, and every finger movement is elegant, natural, and easy to read "
+        "as she plays a calm melodic phrase; her head gives a subtle natural sway in time with the music while the "
+        "smile slowly grows warmer."
+    ),
+    (
+        "An elegant medium-close shot centers a shiba inu and a chrome boxing robot inside a palace-inspired "
+        "championship ring with carved ivory columns, bright gold trim, glossy stone steps, and sweeping crystal "
+        "chandeliers. The shiba inu wears an embroidered brocade boxing robe, a jeweled waist sash, and refined "
+        "round goggles, and both fighters wear premium boxing gloves; the robot has an exposed polished mechanical "
+        "body. Bright luxury arena; fighters dominate frame; slow readable boxing. steady camera. Controlled "
+        "footwork and visible punches, with brief pauses after each exchange."
+    ),
+    (
+        "A cinematic shot shows two young adults meeting again on a quiet train platform in warm sunset light with "
+        "drifting steam and long shadows. Subject fills frame; premium face/detail, correct hands and posture. "
+        "medium shot. They pause in disbelief, step closer, and embrace tightly; the camera then pushes into a "
+        "close-up of their tearful relieved faces."
+    ),
+)
+
+# Curated **Image to Video** (i2v): first-frame image + motion prompt.  Images live in
+# ``examples/offline_inference/lance/assets/image_to_video/`` relative to this file.
+CURATED_I2V_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    (
+        "00003.webp",
+        (
+            "A cinematic polar wildlife shot shows an emperor penguin standing near the edge of a flat ice shelf "
+            "beside calm icy water, with its reflection clearly visible on the smooth blue-gray surface below. The "
+            "penguin is the clear main subject, featuring a black head, white chest, soft yellow neck markings, a "
+            "compact upright body, small dark feet, and smooth feather texture. The surrounding environment is "
+            "cold, quiet, and minimal, with pale snow-covered ice, a slightly uneven frozen edge, distant flat ice "
+            "fields, and soft overcast light creating a calm Antarctic atmosphere. The water remains still and "
+            "reflective, with faint ripples near the ice edge and subtle texture across the surface. The scene feels "
+            "clean, realistic, and highly detailed, keeping the penguin large and readable against the simple polar "
+            "landscape. steady camera. The penguin slowly shifts its body toward the water, takes a small careful "
+            "step at the edge, then gently hops into the water in a clear and natural motion. As it enters, a modest "
+            "splash rises around its body and spreads outward into soft ripples, briefly breaking the reflection. "
+            "The surrounding ice remains stable, the water movement stays physically natural, and the overall scene "
+            "remains calm and believable."
+        ),
+    ),
+    (
+        "00006.webp",
+        (
+            "A premium fantasy-anime shot shows a young forest elf girl standing in a glowing enchanted woodland, "
+            "surrounded by tall dark trees, twisting branches, soft moss, lush plants, and countless floating "
+            "fireflies. She is the clear main subject, positioned slightly to the right of center, with long flowing "
+            "green hair, pointed elf ears, delicate facial features, large expressive eyes, and a small flower "
+            "ornament near her hair. She wears an elegant green-and-white fantasy dress with gold trim, translucent "
+            "sleeves, a jeweled collar detail, and soft layered fabric that catches the turquoise forest light. The "
+            "background is deep and magical, with misty blue-green atmosphere, layered tree trunks fading into the "
+            "distance, glowing particles, and warm firefly lights scattered throughout the scene. The lighting is "
+            "dreamy and luminous, with a bright teal glow behind her creating a soft halo effect and subtle "
+            "highlights on her hair, face, and dress. The scene feels peaceful, magical, and highly detailed, with "
+            "refined color contrast, rich forest textures, and a strong main-subject presence. gentle tracking shot. "
+            "She steps forward, then slowly turns her head to follow a cluster of fireflies crossing in front of "
+            "her. Her expression stays quiet and curious while the teal light outlines her face and dress."
+        ),
+    ),
+    (
+        "00007.webp",
+        (
+            "A detailed cinematic full-body portrait shows a young woman standing indoors in a simple modern room, "
+            "facing the camera with a calm and pleasant expression. She has long brown hair falling naturally over "
+            "her shoulders, warm brown eyes, natural skin texture, and a relaxed upright posture. She wears a fitted "
+            "black sleeveless top, light blue high-waisted jeans, and clean white sneakers. One hand is gently "
+            "raised near the side of her head, while the other arm rests naturally by her side. The background is "
+            "minimal and softly lit, with a plain light-colored wall, warm wooden floor, white baseboard, soft "
+            "daylight entering from the left, and a green potted plant near the window adding a natural detail. The "
+            "subject remains the clear main focus, centered in the frame with stable body proportions, clear facial "
+            "detail, natural hands, and realistic clothing texture. slow push-in shot. She slowly and gently lifts "
+            "her hand to lightly smooth her hair beside her head in a soft, graceful motion. She looks toward the "
+            "camera and gradually shows a warm subtle smile, with slight natural blinking and a relaxed presence. As "
+            "the action continues, the camera gradually moves closer from the full-body view toward her face, "
+            "bringing more attention to her expression while the room remains calm and stable."
+        ),
+    ),
+    (
+        "00008.webp",
+        (
+            "A warm cinematic interior shot shows a ginger cat sleeping peacefully on a sunlit wooden windowsill "
+            "beside indoor plants and a wooden cabinet. The cat is the clear main subject, curled comfortably with "
+            "soft orange fur, a striped tail, relaxed paws, closed eyes, and gentle breathing. Sunlight enters from "
+            "the window, casting warm golden highlights across the cat's fur, the polished wood, and nearby green "
+            "leaves. The room feels quiet and cozy, with potted plants, soft shadows, natural window light, and warm "
+            "wooden textures creating a peaceful domestic atmosphere. The background remains simple and stable, "
+            "keeping attention on the sleeping cat while adding natural detail and depth. steady cozy shot. The "
+            "curled cat stays relaxed, eyes opened, with a slow rise and fall of its body. The nearby plants move "
+            "faintly, and warm wood textures remain stable."
+        ),
+    ),
+    (
+        "00009.webp",
+        (
+            "A cinematic landscape shot shows a powerful waterfall plunging from a high moss-covered cliff into a "
+            "misty river basin below, surrounded by lush green canyon walls, dark wet rock textures, and soft "
+            "overcast daylight. A bright rainbow arches clearly across the lower mist in front of the waterfall, "
+            "with vivid bands of red, orange, yellow, green, blue, and violet standing out against the white spray. "
+            "The waterfall remains the dominant visual focus, with thick streams of white water pouring straight "
+            "down in a continuous curtain, while mist rises and spreads across the base. The foreground shows a "
+            "shallow rocky riverbank with dark pebbles and scattered stones, while the background is filled with "
+            "layered green slopes, damp cliff faces, and soft atmospheric haze. The scene is majestic, fresh, and "
+            "highly detailed, with rich natural textures, luminous mist, and a bright, clearly visible rainbow "
+            "adding a vivid magical accent to the realistic landscape. calm cinematic shot. The waterfall, mist, and "
+            "river move continuously while the surrounding moss-covered rock walls stay still. The rainbow gently "
+            "flickers within the spray under soft daylight."
+        ),
+    ),
+)
+
+
+def _curated_i2v_assets_dir() -> Path | None:
+    """``assets/image_to_video`` next to ``gradio_demo.py`` (resolved at runtime)."""
+    p = Path(__file__).resolve().parent / "assets" / "image_to_video"
+    return p if p.is_dir() else None
+
+
+def _curated_i2v_example_rows() -> list[list]:
+    """``[prompt, image_path, None]`` rows for each curated i2v pair whose image file exists."""
+    base = _curated_i2v_assets_dir()
+    if base is None:
+        return []
+    rows: list[list] = []
+    for fname, prompt in CURATED_I2V_EXAMPLE_PAIRS:
+        if not isinstance(fname, str) or not isinstance(prompt, str):
+            continue
+        fp = (base / fname).resolve()
+        if fp.is_file():
+            rows.append([prompt, str(fp), None])
+    return rows
+
+
+# Curated **Video Understanding** (x2t_video): video + question text.  Clips live in
+# ``examples/offline_inference/lance/assets/video_qa/`` relative to this file.
+CURATED_X2T_VIDEO_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    (
+        "vqa-001-opt.mp4",
+        (
+            "Question:\n"
+            "How many times did the person launch objects on the table?\n"
+            "Options:\n"
+            "(A) 3\n"
+            "(B) 2\n"
+            "(C) 4\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+    (
+        "vqa-002-opt.mp4",
+        (
+            "Question:\n"
+            "The person makes sets of repeated actions. How many distinct repeated actions did the person do?\n"
+            "Options:\n"
+            "(A) 2\n"
+            "(B) 3\n"
+            "(C) 4\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+    (
+        "vqa-006-opt.mp4",
+        (
+            "Question:\n"
+            "In which direction does the purple sphere move in the video?\n"
+            "Options:\n"
+            "(A) Down and to the right.\n"
+            "(B) Up and to the left.\n"
+            "(C) Up and to the right.\n"
+            "(D) The object is stationary.\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+    (
+        "vqa-009.mp4",
+        (
+            "Question:\n"
+            "What is the unrealistic phenomenon displayed in the video?\n"
+            "Options:\n"
+            "(A) The man can manipulate time via phone.\n"
+            "(B) Man grabs an object through a phone screen.\n"
+            "(C) Chocolate transforms into different objects.\n"
+            "(D) Visible means of propulsion enables flight.\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+    (
+        "short-caption-001-opt.mp4",
+        (
+            "Question:\n"
+            "Offer a succinct account of the culinary process shown in this video.\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+    (
+        "long-caption-003.mp4",
+        (
+            "Question:\n"
+            "Provide a detailed description of the given video, capturing its key moments.\n"
+            "\n"
+            "Response:"
+        ),
+    ),
+)
+
+
+def _curated_x2t_video_assets_dir() -> Path | None:
+    """``assets/video_qa`` next to ``gradio_demo.py`` (resolved at runtime)."""
+    p = Path(__file__).resolve().parent / "assets" / "video_qa"
+    return p if p.is_dir() else None
+
+
+def _curated_x2t_video_example_rows() -> list[list]:
+    """``[question, None, video_path]`` rows for each curated video-QA pair whose file exists."""
+    base = _curated_x2t_video_assets_dir()
+    if base is None:
+        return []
+    rows: list[list] = []
+    for fname, question in CURATED_X2T_VIDEO_EXAMPLE_PAIRS:
+        if not isinstance(fname, str) or not isinstance(question, str):
+            continue
+        fp = (base / fname).resolve()
+        if fp.is_file():
+            rows.append([question, None, str(fp)])
+    return rows
+
+
 LANCE_HOMEPAGE_URL = "https://lance-project.github.io/"
 LANCE_PAPER_URL = "http://arxiv.org/abs/2605.18678"
 LANCE_HF_URL = "https://huggingface.co/bytedance-research/Lance"
@@ -632,14 +943,37 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
     process can serve the files directly.  Examples whose media is
     missing on disk are skipped silently so a partial upstream checkout
     still works.
+
+    Curated **t2i** text prompts (``CURATED_T2I_EXAMPLE_PROMPTS``) are always
+    prepended for the Image Generation tab, even when ``root`` is unset.
+    Curated **t2v** text prompts (``CURATED_T2V_EXAMPLE_PROMPTS``) are prepended
+    for the Video Generation tab the same way.
+    Curated **i2v** image+prompt pairs (``CURATED_I2V_EXAMPLE_PAIRS``) are prepended
+    when first-frame files exist under ``_curated_i2v_assets_dir()``.
+    Curated **Video Understanding** pairs (``CURATED_X2T_VIDEO_EXAMPLE_PAIRS``) are
+    prepended when clips exist under ``_curated_x2t_video_assets_dir()`` (``assets/video_qa``).
     """
     import json as _json
     from pathlib import Path as _Path
 
-    if not root or not _Path(root).is_dir():
-        return {}
-    root_p = _Path(root)
     out: dict[str, list[list]] = {}
+    curated_t2i = [[p, None, None] for p in CURATED_T2I_EXAMPLE_PROMPTS]
+    curated_t2v = [[p, None, None] for p in CURATED_T2V_EXAMPLE_PROMPTS]
+    curated_i2v = _curated_i2v_example_rows()
+    curated_x2t_video = _curated_x2t_video_example_rows()
+
+    if not root or not _Path(root).is_dir():
+        if curated_t2i:
+            out["t2i"] = curated_t2i
+        if curated_t2v:
+            out["t2v"] = curated_t2v
+        if curated_i2v:
+            out["i2v"] = curated_i2v
+        if curated_x2t_video:
+            out["x2t_video"] = curated_x2t_video
+        return out
+
+    root_p = _Path(root)
 
     def _resolve(rel: str) -> str | None:
         if not isinstance(rel, str):
@@ -754,6 +1088,15 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
             rows.append(row)
         if rows:
             out[task] = rows
+
+    if curated_t2i:
+        out["t2i"] = curated_t2i + out.get("t2i", [])
+    if curated_t2v:
+        out["t2v"] = curated_t2v + out.get("t2v", [])
+    if curated_i2v:
+        out["i2v"] = curated_i2v + out.get("i2v", [])
+    if curated_x2t_video:
+        out["x2t_video"] = curated_x2t_video + out.get("x2t_video", [])
 
     return out
 
@@ -899,6 +1242,77 @@ APP_CSS = """
 .lance-run-status .prose:empty,
 .lance-run-status .prose p:empty { min-height: 0 !important; padding: 0 !important; margin: 0 !important; }
 .lance-display-frame video, .lance-display-frame img { max-height: 560px; }
+/* Examples section title: plain body weight (no markdown ``###`` heading bold). */
+.lance-examples-panel-title .prose,
+.lance-examples-panel-title .prose h1,
+.lance-examples-panel-title .prose h2,
+.lance-examples-panel-title .prose h3,
+.lance-examples-panel-title .prose h4,
+.lance-examples-panel-title .prose p,
+.lance-examples-panel-title .prose li {
+  font-weight: 400 !important;
+}
+/* t2i/t2v: entire prompt is the button label — plain (non-bold), left-aligned text. */
+.lance-text-presets .lance-preset-click {
+  width: 100% !important;
+  text-align: left !important;
+}
+.lance-text-presets .lance-preset-click button {
+  /* Gradio maps size=lg/md/sm to --button-*-text-weight (often semibold). */
+  --button-large-text-weight: 400 !important;
+  --button-medium-text-weight: 400 !important;
+  --button-small-text-weight: 400 !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: unset !important;
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  text-align: left !important;
+  justify-content: flex-start !important;
+  align-items: flex-start !important;
+  padding: 12px 14px !important;
+  margin: 0 0 12px 0 !important;
+  font-weight: 400 !important;
+  font-size: 0.92rem !important;
+  line-height: 1.45 !important;
+  border-radius: 10px !important;
+  background: #f8fafc !important;
+  border: 1px solid #cbd5e1 !important;
+  color: #334155 !important;
+}
+.lance-text-presets .lance-preset-click button,
+.lance-text-presets .lance-preset-click button * {
+  font-weight: 400 !important;
+  text-align: left !important;
+}
+.lance-text-presets .lance-preset-click button span {
+  white-space: pre-wrap !important;
+  word-break: break-word !important;
+  text-align: left !important;
+  display: block !important;
+  width: 100% !important;
+}
+/* Main prompt textbox: regular-weight label, left-aligned typing area. */
+.lance-prompt-in label {
+  font-weight: 400 !important;
+  text-align: left !important;
+}
+.lance-prompt-in .block-label,
+.lance-prompt-in .block-label span {
+  font-weight: 400 !important;
+}
+.lance-prompt-in textarea {
+  --input-text-weight: 400 !important;
+  text-align: left !important;
+  font-weight: 400 !important;
+}
+/* ``gr.Examples`` table layout: long prompt cells may wrap. */
+.lance-task-examples .tr-body td {
+  white-space: normal !important;
+  text-align: left !important;
+  vertical-align: top !important;
+  overflow: visible !important;
+}
 """
 
 
@@ -934,6 +1348,32 @@ def build_header_html() -> str:
     """
 
 
+def _text_task_example_presets(projected_rows: list[list], prompt_in: gr.Textbox) -> None:
+    """Render t2i/t2v presets as one clickable block per prompt (full text wraps).
+
+    Each preset is a ``gr.Button`` whose *label* is the entire prompt and is styled
+    like a text card, so users click the prompt itself — no separate load row.
+
+    ``gr.Examples`` is avoided: its Dataset gallery preview truncates long strings.
+    """
+    with gr.Column(elem_classes=["lance-text-presets"]):
+        for row in projected_rows:
+            p = row[0]
+            if not isinstance(p, str):
+                continue
+            preset_btn = gr.Button(
+                p,
+                variant="secondary",
+                size="sm",
+                elem_classes=["lance-preset-click"],
+            )
+            preset_btn.click(
+                lambda pr=p: gr.update(value=pr),
+                outputs=[prompt_in],
+                show_progress="hidden",
+            )
+
+
 def build_ui(
     examples_by_task: dict[str, list[list]] | None = None,
     showcase_by_task: dict[str, list[str]] | None = None,
@@ -960,6 +1400,7 @@ def build_ui(
                         label="Prompt",
                         lines=5,
                         placeholder="Describe the desired output...",
+                        elem_classes=["lance-prompt-in"],
                     )
                     # Aspect ratio is **not user-configurable** — upstream
                     # Lance always snaps to one of 6 hard-coded buckets based
@@ -1067,16 +1508,24 @@ def build_ui(
                 if not rows:
                     continue
                 projected_rows = [_project_row(task, r) for r in rows]
-                with gr.Group(visible=(task == _initial_task), elem_classes=["lance-panel"]) as grp:
-                    gr.Markdown(f"### 📁 Official Lance examples — `{task}`  (click to load)")
-                    # Bind to only the components this task actually populates.
-                    gr.Examples(
-                        examples=projected_rows,
-                        inputs=task_input_components[task],
-                        label="",
-                        examples_per_page=4,
-                        cache_examples=False,
+                with gr.Group(
+                    visible=(task == _initial_task),
+                    elem_classes=["lance-panel", "lance-task-examples"],
+                ) as grp:
+                    gr.Markdown(
+                        f"📁 Official Lance examples — `{task}` (click a preset to load it into the prompt field above)",
+                        elem_classes=["lance-examples-panel-title"],
                     )
+                    if task in ("t2i", "t2v"):
+                        _text_task_example_presets(projected_rows, prompt_in)
+                    else:
+                        gr.Examples(
+                            examples=projected_rows,
+                            inputs=task_input_components[task],
+                            label="",
+                            examples_per_page=max(1, len(projected_rows)),
+                            cache_examples=False,
+                        )
                     # NOTE: Upstream's 8 ``video-editing-demo-*.mp4`` + the
                     # ``multi-turn-editing-demo-01.mp4`` filmstrip are merged
                     # into the runnable examples list above via
@@ -1281,6 +1730,12 @@ def main():
     allowed = []
     if args.examples_root and Path(args.examples_root).is_dir():
         allowed.append(str(Path(args.examples_root).resolve()))
+    i2v_assets = _curated_i2v_assets_dir()
+    if i2v_assets is not None:
+        allowed.append(str(i2v_assets.resolve()))
+    x2t_video_assets = _curated_x2t_video_assets_dir()
+    if x2t_video_assets is not None:
+        allowed.append(str(x2t_video_assets.resolve()))
     # ``_extract_demo_sources`` caches cropped video-editing demo sources under
     # ``/tmp/lance_demo_sources`` so they survive across launches; whitelist it
     # too or the click-to-load will hit ``InvalidPathError``.
