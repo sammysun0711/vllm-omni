@@ -122,6 +122,7 @@ LABEL_TO_TASK = {
 
 # Gradio presets for **Image Generation** (t2i): listed first, then any rows
 # from upstream ``config/examples/t2i_example.json`` when ``--examples-root`` is set.
+# **t2i** and **t2v** curated prompts both use ``gr.Examples`` in the UI.
 CURATED_T2I_EXAMPLE_PROMPTS: tuple[str, ...] = (
     (
         "The image depicts exactly 3 foxes and exactly 3 small lanterns in a snowy pine forest. "
@@ -145,6 +146,7 @@ CURATED_T2I_EXAMPLE_PROMPTS: tuple[str, ...] = (
 
 # Gradio presets for **Video Generation** (t2v): listed first, then any rows from
 # upstream ``config/examples/t2v_example.json`` when ``--examples-root`` is set.
+# Shown in the UI as ``gr.Examples`` (prompt column; CSS allows wrapping in cells).
 # (User list skipped number 9; entries below are prompts 1–8 and 10.)
 CURATED_T2V_EXAMPLE_PROMPTS: tuple[str, ...] = (
     (
@@ -159,12 +161,6 @@ CURATED_T2V_EXAMPLE_PROMPTS: tuple[str, ...] = (
         "frame and remains the clear visual focus. The scene is whimsical, beautiful, and richly detailed, with "
         "strong character focus and elegant atmosphere. fixed shot. The robot draws the bow in smooth arcs "
         "while the puppy listens quietly."
-    ),
-    (
-        "A medium-close shot shows a Persian cat wearing ornate spectacles and a velvet academic robe inside a "
-        "candlelit salon with carved shelves, chandeliers, and mosaic floors. The cat fills the frame with "
-        "crisp fur detail and lively eyes. fixed shot. It lifts a slender magic wand and traces a soft glowing "
-        "arc through the air."
     ),
     (
         "A cinematic landscape shot shows a tropical coastline at sunset with pink sky, moving waves, black "
@@ -186,16 +182,6 @@ CURATED_T2V_EXAMPLE_PROMPTS: tuple[str, ...] = (
     ),
     (
         "A detailed cinematic portrait begins from a medium view and gradually moves into a close facial framing "
-        "of a beautiful young woman shaping clay on a pottery wheel in a bright ceramic workshop with sunlit "
-        "shelves, bowls, and hanging tools. The person is the dominant subject in the frame, styled with a "
-        "tied-back apron, delicate earrings, rolled sleeves, and a simple pendant, and shown with premium skin "
-        "detail, expressive eyes, subtle brow and cheek motion, anatomically convincing hands, and rich costume "
-        "texture. Her hands guide the spinning clay in one smooth controlled motion as her expression moves from "
-        "serene focus into a soft smile. Her gaze starts on the camera, follows the clay, briefly rises toward the "
-        "window light, and returns to the lens while her head inclines naturally with the wheel."
-    ),
-    (
-        "A detailed cinematic portrait begins from a medium view and gradually moves into a close facial framing "
         "of a beautiful young woman playing a grand piano in a luminous marble music hall with tall windows, "
         "gold sconces, flowing curtains, polished floors, and refined floral arrangements. Styled with pearl "
         "earrings, a delicate crystal hairpin, and a layered silver necklace above an elegant satin gown. "
@@ -212,17 +198,60 @@ CURATED_T2V_EXAMPLE_PROMPTS: tuple[str, ...] = (
         "body. Bright luxury arena; fighters dominate frame; slow readable boxing. steady camera. Controlled "
         "footwork and visible punches, with brief pauses after each exchange."
     ),
-    (
-        "A cinematic shot shows two young adults meeting again on a quiet train platform in warm sunset light with "
-        "drifting steam and long shadows. Subject fills frame; premium face/detail, correct hands and posture. "
-        "medium shot. They pause in disbelief, step closer, and embrace tightly; the camera then pushes into a "
-        "close-up of their tearful relieved faces."
-    ),
 )
 
 # Curated **Image to Video** (i2v): first-frame image + motion prompt.  Images live in
 # ``examples/offline_inference/lance/assets/image_to_video/`` relative to this file.
 CURATED_I2V_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    (
+        "00007.webp",
+        (
+            "A detailed cinematic full-body portrait shows a young woman standing indoors in a simple modern room, "
+            "facing the camera with a calm and pleasant expression. She has long brown hair falling naturally over "
+            "her shoulders, warm brown eyes, natural skin texture, and a relaxed upright posture. She wears a fitted "
+            "black sleeveless top, light blue high-waisted jeans, and clean white sneakers. One hand is gently "
+            "raised near the side of her head, while the other arm rests naturally by her side. The background is "
+            "minimal and softly lit, with a plain light-colored wall, warm wooden floor, white baseboard, soft "
+            "daylight entering from the left, and a green potted plant near the window adding a natural detail. The "
+            "subject remains the clear main focus, centered in the frame with stable body proportions, clear facial "
+            "detail, natural hands, and realistic clothing texture. slow push-in shot. She slowly and gently lifts "
+            "her hand to lightly smooth her hair beside her head in a soft, graceful motion. She looks toward the "
+            "camera and gradually shows a warm subtle smile, with slight natural blinking and a relaxed presence. As "
+            "the action continues, the camera gradually moves closer from the full-body view toward her face, "
+            "bringing more attention to her expression while the room remains calm and stable."
+        ),
+    ),
+    (
+        "00009.webp",
+        (
+            "A cinematic landscape shot shows a powerful waterfall plunging from a high moss-covered cliff into a "
+            "misty river basin below, surrounded by lush green canyon walls, dark wet rock textures, and soft "
+            "overcast daylight. A bright rainbow arches clearly across the lower mist in front of the waterfall, "
+            "with vivid bands of red, orange, yellow, green, blue, and violet standing out against the white spray. "
+            "The waterfall remains the dominant visual focus, with thick streams of white water pouring straight "
+            "down in a continuous curtain, while mist rises and spreads across the base. The foreground shows a "
+            "shallow rocky riverbank with dark pebbles and scattered stones, while the background is filled with "
+            "layered green slopes, damp cliff faces, and soft atmospheric haze. The scene is majestic, fresh, and "
+            "highly detailed, with rich natural textures, luminous mist, and a bright, clearly visible rainbow "
+            "adding a vivid magical accent to the realistic landscape. calm cinematic shot. The waterfall, mist, and "
+            "river move continuously while the surrounding moss-covered rock walls stay still. The rainbow gently "
+            "flickers within the spray under soft daylight."
+        ),
+    ),
+    (
+        "00008.webp",
+        (
+            "A warm cinematic interior shot shows a ginger cat sleeping peacefully on a sunlit wooden windowsill "
+            "beside indoor plants and a wooden cabinet. The cat is the clear main subject, curled comfortably with "
+            "soft orange fur, a striped tail, relaxed paws, closed eyes, and gentle breathing. Sunlight enters from "
+            "the window, casting warm golden highlights across the cat's fur, the polished wood, and nearby green "
+            "leaves. The room feels quiet and cozy, with potted plants, soft shadows, natural window light, and warm "
+            "wooden textures creating a peaceful domestic atmosphere. The background remains simple and stable, "
+            "keeping attention on the sleeping cat while adding natural detail and depth. steady cozy shot. The "
+            "curled cat stays relaxed, eyes opened, with a slow rise and fall of its body. The nearby plants move "
+            "faintly, and warm wood textures remain stable."
+        ),
+    ),
     (
         "00003.webp",
         (
@@ -259,55 +288,25 @@ CURATED_I2V_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
             "her. Her expression stays quiet and curious while the teal light outlines her face and dress."
         ),
     ),
-    (
-        "00007.webp",
-        (
-            "A detailed cinematic full-body portrait shows a young woman standing indoors in a simple modern room, "
-            "facing the camera with a calm and pleasant expression. She has long brown hair falling naturally over "
-            "her shoulders, warm brown eyes, natural skin texture, and a relaxed upright posture. She wears a fitted "
-            "black sleeveless top, light blue high-waisted jeans, and clean white sneakers. One hand is gently "
-            "raised near the side of her head, while the other arm rests naturally by her side. The background is "
-            "minimal and softly lit, with a plain light-colored wall, warm wooden floor, white baseboard, soft "
-            "daylight entering from the left, and a green potted plant near the window adding a natural detail. The "
-            "subject remains the clear main focus, centered in the frame with stable body proportions, clear facial "
-            "detail, natural hands, and realistic clothing texture. slow push-in shot. She slowly and gently lifts "
-            "her hand to lightly smooth her hair beside her head in a soft, graceful motion. She looks toward the "
-            "camera and gradually shows a warm subtle smile, with slight natural blinking and a relaxed presence. As "
-            "the action continues, the camera gradually moves closer from the full-body view toward her face, "
-            "bringing more attention to her expression while the room remains calm and stable."
-        ),
-    ),
-    (
-        "00008.webp",
-        (
-            "A warm cinematic interior shot shows a ginger cat sleeping peacefully on a sunlit wooden windowsill "
-            "beside indoor plants and a wooden cabinet. The cat is the clear main subject, curled comfortably with "
-            "soft orange fur, a striped tail, relaxed paws, closed eyes, and gentle breathing. Sunlight enters from "
-            "the window, casting warm golden highlights across the cat's fur, the polished wood, and nearby green "
-            "leaves. The room feels quiet and cozy, with potted plants, soft shadows, natural window light, and warm "
-            "wooden textures creating a peaceful domestic atmosphere. The background remains simple and stable, "
-            "keeping attention on the sleeping cat while adding natural detail and depth. steady cozy shot. The "
-            "curled cat stays relaxed, eyes opened, with a slow rise and fall of its body. The nearby plants move "
-            "faintly, and warm wood textures remain stable."
-        ),
-    ),
-    (
-        "00009.webp",
-        (
-            "A cinematic landscape shot shows a powerful waterfall plunging from a high moss-covered cliff into a "
-            "misty river basin below, surrounded by lush green canyon walls, dark wet rock textures, and soft "
-            "overcast daylight. A bright rainbow arches clearly across the lower mist in front of the waterfall, "
-            "with vivid bands of red, orange, yellow, green, blue, and violet standing out against the white spray. "
-            "The waterfall remains the dominant visual focus, with thick streams of white water pouring straight "
-            "down in a continuous curtain, while mist rises and spreads across the base. The foreground shows a "
-            "shallow rocky riverbank with dark pebbles and scattered stones, while the background is filled with "
-            "layered green slopes, damp cliff faces, and soft atmospheric haze. The scene is majestic, fresh, and "
-            "highly detailed, with rich natural textures, luminous mist, and a bright, clearly visible rainbow "
-            "adding a vivid magical accent to the realistic landscape. calm cinematic shot. The waterfall, mist, and "
-            "river move continuously while the surrounding moss-covered rock walls stay still. The rainbow gently "
-            "flickers within the spray under soft daylight."
-        ),
-    ),
+)
+
+# Curated **Video edit** (video_edit): source clip + edit prompt, same pattern as
+# i2v but clips live under ``assets/video_editing/`` next to this script.
+CURATED_VIDEO_EDIT_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    ("multi-00.mp4", "Replace short straight hair with French curly hair."),
+    ("multi-01.mp4", "Add a floral headband with red and white flowers to her hair."),
+    ("multi-02.mp4", "Change the background to a fairytale castle by a lake."),
+    ("multi-03.mp4", "Make her raise one hand to wave slowly."),
+)
+
+# Curated **Image edit** (image_edit): source image + edit prompt.  Files live under
+# ``assets/image_editing/`` next to this script (same pattern as ``video_edit``).
+CURATED_IMAGE_EDIT_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    ("dog.png", "Convert the astronaut into a colorful cartoon-style illustration."),
+    ("dog.png", "Convert the astronaut into a Ghibli-style."),
+    ("dog.png", "Convert the astronaut into a Cyberpunk style."),
+    ("dog.png", "Convert the astronaut into a Persian cat."),
+    ("dog.png", "Convert the background to Mars landscape."),
 )
 
 
@@ -332,79 +331,83 @@ def _curated_i2v_example_rows() -> list[list]:
     return rows
 
 
+def _curated_video_edit_assets_dir() -> Path | None:
+    """``assets/video_editing`` next to ``gradio_demo.py`` (resolved at runtime)."""
+    p = Path(__file__).resolve().parent / "assets" / "video_editing"
+    return p if p.is_dir() else None
+
+
+def _curated_video_edit_example_rows() -> list[list]:
+    """``[prompt, None, video_path]`` rows for each curated edit pair whose mp4 exists."""
+    base = _curated_video_edit_assets_dir()
+    if base is None:
+        return []
+    rows: list[list] = []
+    for fname, prompt in CURATED_VIDEO_EDIT_EXAMPLE_PAIRS:
+        if not isinstance(fname, str) or not isinstance(prompt, str):
+            continue
+        fp = (base / fname).resolve()
+        if fp.is_file():
+            rows.append([prompt, None, str(fp)])
+    return rows
+
+
+def _curated_image_edit_assets_dir() -> Path | None:
+    """``assets/image_editing`` next to ``gradio_demo.py`` (resolved at runtime)."""
+    p = Path(__file__).resolve().parent / "assets" / "image_editing"
+    return p if p.is_dir() else None
+
+
+def _curated_image_edit_example_rows() -> list[list]:
+    """``[prompt, image_path, None]`` rows for each curated image-edit pair whose file exists."""
+    base = _curated_image_edit_assets_dir()
+    if base is None:
+        return []
+    rows: list[list] = []
+    for fname, prompt in CURATED_IMAGE_EDIT_EXAMPLE_PAIRS:
+        if not isinstance(fname, str) or not isinstance(prompt, str):
+            continue
+        fp = (base / fname).resolve()
+        if fp.is_file():
+            rows.append([prompt, str(fp), None])
+    return rows
+
+
 # Curated **Video Understanding** (x2t_video): video + question text.  Clips live in
 # ``examples/offline_inference/lance/assets/video_qa/`` relative to this file.
 CURATED_X2T_VIDEO_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
     (
-        "vqa-001-opt.mp4",
-        (
-            "Question:\n"
-            "How many times did the person launch objects on the table?\n"
-            "Options:\n"
-            "(A) 3\n"
-            "(B) 2\n"
-            "(C) 4\n"
-            "\n"
-            "Response:"
-        ),
-    ),
-    (
-        "vqa-002-opt.mp4",
-        (
-            "Question:\n"
-            "The person makes sets of repeated actions. How many distinct repeated actions did the person do?\n"
-            "Options:\n"
-            "(A) 2\n"
-            "(B) 3\n"
-            "(C) 4\n"
-            "\n"
-            "Response:"
-        ),
-    ),
-    (
         "vqa-006-opt.mp4",
         (
-            "Question:\n"
             "In which direction does the purple sphere move in the video?\n"
             "Options:\n"
             "(A) Down and to the right.\n"
             "(B) Up and to the left.\n"
             "(C) Up and to the right.\n"
             "(D) The object is stationary.\n"
-            "\n"
-            "Response:"
         ),
     ),
     (
         "vqa-009.mp4",
         (
-            "Question:\n"
             "What is the unrealistic phenomenon displayed in the video?\n"
             "Options:\n"
             "(A) The man can manipulate time via phone.\n"
             "(B) Man grabs an object through a phone screen.\n"
             "(C) Chocolate transforms into different objects.\n"
             "(D) Visible means of propulsion enables flight.\n"
-            "\n"
-            "Response:"
         ),
     ),
     (
         "short-caption-001-opt.mp4",
         (
-            "Question:\n"
             "Offer a succinct account of the culinary process shown in this video.\n"
-            "\n"
-            "Response:"
         ),
     ),
     (
         "long-caption-003.mp4",
         (
-            "Question:\n"
             "Provide a detailed description of the given video, capturing its key moments.\n"
-            "\n"
-            "Response:"
         ),
     ),
 )
@@ -428,6 +431,37 @@ def _curated_x2t_video_example_rows() -> list[list]:
         fp = (base / fname).resolve()
         if fp.is_file():
             rows.append([question, None, str(fp)])
+    return rows
+
+
+# Curated **Image Understanding** (x2t_image): image + question text.  Assets live in
+# ``examples/offline_inference/lance/assets/image_understanding/`` relative to this file.
+CURATED_X2T_IMAGE_EXAMPLE_PAIRS: tuple[tuple[str, str], ...] = (
+    ("case-004.png", "Is the largest segment greater than sum of all the other segments?"),
+    ("case-005.png", "What percentage of respondents want better border security?"),
+    ("case-018-opt.webp", "What is the appearance of the Colosseum in Rome, Italy?"),
+    ("case-021-opt.webp", "How does a total solar eclipse look like from Earth?"),
+)
+
+
+def _curated_x2t_image_assets_dir() -> Path | None:
+    """``assets/image_understanding`` next to ``gradio_demo.py`` (resolved at runtime)."""
+    p = Path(__file__).resolve().parent / "assets" / "image_understanding"
+    return p if p.is_dir() else None
+
+
+def _curated_x2t_image_example_rows() -> list[list]:
+    """``[question, image_path, None]`` rows for each curated image-QA pair whose file exists."""
+    base = _curated_x2t_image_assets_dir()
+    if base is None:
+        return []
+    rows: list[list] = []
+    for fname, question in CURATED_X2T_IMAGE_EXAMPLE_PAIRS:
+        if not isinstance(fname, str) or not isinstance(question, str):
+            continue
+        fp = (base / fname).resolve()
+        if fp.is_file():
+            rows.append([question, str(fp), None])
     return rows
 
 
@@ -950,8 +984,16 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
     for the Video Generation tab the same way.
     Curated **i2v** image+prompt pairs (``CURATED_I2V_EXAMPLE_PAIRS``) are prepended
     when first-frame files exist under ``_curated_i2v_assets_dir()``.
+    Curated **video_edit** clip+prompt pairs (``CURATED_VIDEO_EDIT_EXAMPLE_PAIRS``) are
+    prepended when matching mp4 files exist under ``_curated_video_edit_assets_dir()``
+    (``assets/video_editing``).
+    Curated **image_edit** image+prompt pairs (``CURATED_IMAGE_EDIT_EXAMPLE_PAIRS``) are
+    prepended when matching image files exist under ``_curated_image_edit_assets_dir()``
+    (``assets/image_editing``).
     Curated **Video Understanding** pairs (``CURATED_X2T_VIDEO_EXAMPLE_PAIRS``) are
     prepended when clips exist under ``_curated_x2t_video_assets_dir()`` (``assets/video_qa``).
+    Curated **Image Understanding** pairs (``CURATED_X2T_IMAGE_EXAMPLE_PAIRS``) are
+    prepended when images exist under ``_curated_x2t_image_assets_dir()`` (``assets/image_understanding``).
     """
     import json as _json
     from pathlib import Path as _Path
@@ -960,7 +1002,10 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
     curated_t2i = [[p, None, None] for p in CURATED_T2I_EXAMPLE_PROMPTS]
     curated_t2v = [[p, None, None] for p in CURATED_T2V_EXAMPLE_PROMPTS]
     curated_i2v = _curated_i2v_example_rows()
+    curated_video_edit = _curated_video_edit_example_rows()
+    curated_image_edit = _curated_image_edit_example_rows()
     curated_x2t_video = _curated_x2t_video_example_rows()
+    curated_x2t_image = _curated_x2t_image_example_rows()
 
     if not root or not _Path(root).is_dir():
         if curated_t2i:
@@ -969,8 +1014,14 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
             out["t2v"] = curated_t2v
         if curated_i2v:
             out["i2v"] = curated_i2v
+        if curated_video_edit:
+            out["video_edit"] = curated_video_edit
+        if curated_image_edit:
+            out["image_edit"] = curated_image_edit
         if curated_x2t_video:
             out["x2t_video"] = curated_x2t_video
+        if curated_x2t_image:
+            out["x2t_image"] = curated_x2t_image
         return out
 
     root_p = _Path(root)
@@ -1023,13 +1074,12 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
         if rows:
             out[task] = rows
 
-    # ---- image_edit: curated visually-distinct pairs ----
-    # Upstream ``image_edit_example.json`` ships 5 *different prompts* against
-    # the *same* source image (``edit_img.jpg``), which makes for a confusing
-    # gradio gallery (5 thumbnails that look identical).  We substitute 5
-    # visually-distinct sources from the i2v frame pool — same upstream
-    # repo, just paired differently — and write a fresh edit prompt for
-    # each so users see what kinds of transforms image_edit supports.
+    # ---- image_edit: upstream ``config/examples`` pairs + local ``assets/image_editing`` ----
+    # Curated rows from ``CURATED_IMAGE_EDIT_EXAMPLE_PAIRS`` are prepended at the end
+    # of this function.  Without ``--examples-root``, only those curated rows appear.
+    # With a Lance checkout, we also load five visually-distinct upstream sources
+    # (``image_edit_pairs`` below) because ``image_edit_example.json`` uses one
+    # thumbnail for five different prompts, which is confusing in ``gr.Examples``.
     image_edit_pairs = [
         # (relative source path, prompt)
         ("config/examples/image_edit_examples/edit_img.jpg", "Remove the hat from the painting."),
@@ -1095,8 +1145,14 @@ def _load_lance_examples(root: str) -> dict[str, list[list]]:
         out["t2v"] = curated_t2v + out.get("t2v", [])
     if curated_i2v:
         out["i2v"] = curated_i2v + out.get("i2v", [])
+    if curated_video_edit:
+        out["video_edit"] = curated_video_edit + out.get("video_edit", [])
+    if curated_image_edit:
+        out["image_edit"] = curated_image_edit + out.get("image_edit", [])
     if curated_x2t_video:
         out["x2t_video"] = curated_x2t_video + out.get("x2t_video", [])
+    if curated_x2t_image:
+        out["x2t_image"] = curated_x2t_image + out.get("x2t_image", [])
 
     return out
 
@@ -1194,21 +1250,29 @@ def run_task(
     # and successful runs are self-evident from the output panel.
     if task in {"x2t_image", "x2t_video"}:
         return (
-            gr.update(visible=False),
-            gr.update(visible=False),
+            gr.update(visible="hidden"),
+            gr.update(visible="hidden"),
             gr.update(value=str(text_out or "(empty)"), visible=True),
         )
     if task in {"t2v", "i2v", "video_edit"}:
         frames = custom.get("video_frames")
         if frames is None:
             raise gr.Error("No video frames in output.")
-        return (gr.update(visible=False), gr.update(value=_save_video(frames), visible=True), gr.update(visible=False))
+        return (
+            gr.update(visible="hidden"),
+            gr.update(value=_save_video(frames), visible=True),
+            gr.update(visible="hidden"),
+        )
     # image tasks — orchestrator strips ``outputs[0].output`` across the
     # IPC boundary but preserves ``custom_output``, so prefer the latter.
     img_out = custom.get("image") or getattr(outputs[0], "output", None)
     if img_out is None:
         raise gr.Error("No image in output.")
-    return (gr.update(value=_save_image(img_out), visible=True), gr.update(visible=False), gr.update(visible=False))
+    return (
+        gr.update(value=_save_image(img_out), visible=True),
+        gr.update(visible="hidden"),
+        gr.update(visible="hidden"),
+    )
 
 
 # -------------------------------------------------- UI building -----
@@ -1252,46 +1316,6 @@ APP_CSS = """
 .lance-examples-panel-title .prose li {
   font-weight: 400 !important;
 }
-/* t2i/t2v: entire prompt is the button label — plain (non-bold), left-aligned text. */
-.lance-text-presets .lance-preset-click {
-  width: 100% !important;
-  text-align: left !important;
-}
-.lance-text-presets .lance-preset-click button {
-  /* Gradio maps size=lg/md/sm to --button-*-text-weight (often semibold). */
-  --button-large-text-weight: 400 !important;
-  --button-medium-text-weight: 400 !important;
-  --button-small-text-weight: 400 !important;
-  width: 100% !important;
-  height: auto !important;
-  min-height: unset !important;
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  text-align: left !important;
-  justify-content: flex-start !important;
-  align-items: flex-start !important;
-  padding: 12px 14px !important;
-  margin: 0 0 12px 0 !important;
-  font-weight: 400 !important;
-  font-size: 0.92rem !important;
-  line-height: 1.45 !important;
-  border-radius: 10px !important;
-  background: #f8fafc !important;
-  border: 1px solid #cbd5e1 !important;
-  color: #334155 !important;
-}
-.lance-text-presets .lance-preset-click button,
-.lance-text-presets .lance-preset-click button * {
-  font-weight: 400 !important;
-  text-align: left !important;
-}
-.lance-text-presets .lance-preset-click button span {
-  white-space: pre-wrap !important;
-  word-break: break-word !important;
-  text-align: left !important;
-  display: block !important;
-  width: 100% !important;
-}
 /* Main prompt textbox: regular-weight label, left-aligned typing area. */
 .lance-prompt-in label {
   font-weight: 400 !important;
@@ -1312,6 +1336,29 @@ APP_CSS = """
   text-align: left !important;
   vertical-align: top !important;
   overflow: visible !important;
+}
+/*
+ * Single-input Examples (t2i / t2v) use Dataset **gallery** layout by default,
+ * which renders each prompt as a small bordered “card” — often read as empty
+ * grey strips.  Force a full-width vertical stack so prompts read as normal
+ * text blocks (similar to the table experience for media tasks).
+ */
+.lance-task-examples .gallery {
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: stretch !important;
+  gap: var(--spacing-sm) !important;
+}
+.lance-task-examples .gallery-item {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+/* Output ``gr.Video`` is display-only — trim the default tall empty shell a bit */
+.lance-output-video {
+  min-height: 0 !important;
+}
+.lance-output-video .wrap {
+  min-height: 120px !important;
 }
 """
 
@@ -1348,39 +1395,13 @@ def build_header_html() -> str:
     """
 
 
-def _text_task_example_presets(projected_rows: list[list], prompt_in: gr.Textbox) -> None:
-    """Render t2i/t2v presets as one clickable block per prompt (full text wraps).
-
-    Each preset is a ``gr.Button`` whose *label* is the entire prompt and is styled
-    like a text card, so users click the prompt itself — no separate load row.
-
-    ``gr.Examples`` is avoided: its Dataset gallery preview truncates long strings.
-    """
-    with gr.Column(elem_classes=["lance-text-presets"]):
-        for row in projected_rows:
-            p = row[0]
-            if not isinstance(p, str):
-                continue
-            preset_btn = gr.Button(
-                p,
-                variant="secondary",
-                size="sm",
-                elem_classes=["lance-preset-click"],
-            )
-            preset_btn.click(
-                lambda pr=p: gr.update(value=pr),
-                outputs=[prompt_in],
-                show_progress="hidden",
-            )
-
-
 def build_ui(
     examples_by_task: dict[str, list[list]] | None = None,
     showcase_by_task: dict[str, list[str]] | None = None,
 ):
     examples_by_task = examples_by_task or {}
     showcase_by_task = showcase_by_task or {}
-    with gr.Blocks(title="Lance × vllm-omni", css=APP_CSS) as demo:
+    with gr.Blocks(title="Lance × vllm-omni") as demo:
         gr.HTML(build_header_html())
 
         # ── Task selector ──
@@ -1412,7 +1433,7 @@ def build_ui(
                         label="Aspect Ratio (auto)",
                         choices=ASPECT_RATIO_CHOICES,
                         value=DEFAULT_VIDEO_AR,
-                        visible=False,
+                        visible="hidden",
                         interactive=False,
                     )
                     with gr.Row():
@@ -1432,7 +1453,17 @@ def build_ui(
                     size_md = gr.Markdown(_format_size_md("i2v", 848, 480), elem_classes=["lance-run-status"])
 
                 image_in = gr.Image(label="Input Image", type="pil", visible=True, elem_classes=["lance-display-frame"])
-                video_in = gr.Video(label="Input Video", visible=False, elem_classes=["lance-display-frame"])
+                # ``gr.Examples`` merges ``**component_props`` from Dataset creation time.
+                # If ``video_in`` starts with ``visible=False`` (i2v default), row clicks
+                # re-apply that flag and the main player stays blank.  Toggle a wrapper
+                # Row for task visibility; keep ``Video(visible=True)`` so example loads
+                # only update ``value``.
+                with gr.Row(visible="hidden") as video_input_row:
+                    video_in = gr.Video(
+                        label="Input Video",
+                        visible=True,
+                        elem_classes=["lance-display-frame"],
+                    )
 
                 with gr.Accordion("Advanced Parameters", open=False):
                     seed_in = gr.Number(label="Seed", value=DEFAULT_SEED, precision=0)
@@ -1451,15 +1482,18 @@ def build_ui(
             # ─── RIGHT: output ───
             with gr.Column(scale=1):
                 with gr.Group(elem_classes=["lance-panel"]):
-                    image_out = gr.Image(label="Output Image", visible=False, elem_classes=["lance-display-frame"])
+                    image_out = gr.Image(label="Output Image", visible="hidden", elem_classes=["lance-display-frame"])
                     video_out = gr.Video(
                         label="Output Video",
                         autoplay=True,
                         loop=True,
                         visible=True,
-                        elem_classes=["lance-display-frame"],
+                        interactive=False,
+                        sources=[],
+                        buttons=["download"],
+                        elem_classes=["lance-display-frame", "lance-output-video"],
                     )
-                    text_out = gr.Textbox(label="Output Caption", lines=6, visible=False)
+                    text_out = gr.Textbox(label="Output Caption", lines=6, visible="hidden")
                 # Status text was previously rendered as ``gr.Markdown("",
                 # ...)`` which left an empty grey bar in the UI before the
                 # first run.  Dropped — Gradio's built-in toast / error
@@ -1467,9 +1501,8 @@ def build_ui(
                 # placeholder added no signal but stole vertical real estate.
 
         # ─── Official Lance examples per task ───
-        # Click an example row → prompt + image/video auto-fill.  Each
-        # task has its own ``gr.Examples`` block; only the active task's
-        # block is shown.  Order matches LABEL_TO_TASK (radio order).
+        # Click an example row → prompt + image/video auto-fill.  Each task has
+        # its own ``gr.Examples`` block; only the active task's block is shown.
         _initial_task = LABEL_TO_TASK[TASK_I2V_LABEL]  # default selection
         _example_groups: dict[str, gr.Group] = {}
         if examples_by_task:
@@ -1478,14 +1511,16 @@ def build_ui(
             # also includes ``None`` placeholders for ``Image`` (the player
             # stays blank).  Binding each task's Examples block to *only* the
             # components it actually fills sidesteps that issue.
+            # Order = table column order in ``gr.Examples``: put media first
+            # (thumbnail left) and prompt second (text right).
             task_input_components: dict[str, list] = {
                 "t2i": [prompt_in],
                 "t2v": [prompt_in],
-                "i2v": [prompt_in, image_in],
-                "image_edit": [prompt_in, image_in],
-                "x2t_image": [prompt_in, image_in],
-                "video_edit": [prompt_in, video_in],
-                "x2t_video": [prompt_in, video_in],
+                "i2v": [image_in, prompt_in],
+                "image_edit": [image_in, prompt_in],
+                "x2t_image": [image_in, prompt_in],
+                "video_edit": [video_in, prompt_in],
+                "x2t_video": [video_in, prompt_in],
             }
 
             def _project_row(task: str, row: list) -> list:
@@ -1509,23 +1544,20 @@ def build_ui(
                     continue
                 projected_rows = [_project_row(task, r) for r in rows]
                 with gr.Group(
-                    visible=(task == _initial_task),
+                    visible=(True if task == _initial_task else "hidden"),
                     elem_classes=["lance-panel", "lance-task-examples"],
                 ) as grp:
                     gr.Markdown(
                         f"📁 Official Lance examples — `{task}` (click a preset to load it into the prompt field above)",
                         elem_classes=["lance-examples-panel-title"],
                     )
-                    if task in ("t2i", "t2v"):
-                        _text_task_example_presets(projected_rows, prompt_in)
-                    else:
-                        gr.Examples(
-                            examples=projected_rows,
-                            inputs=task_input_components[task],
-                            label="",
-                            examples_per_page=max(1, len(projected_rows)),
-                            cache_examples=False,
-                        )
+                    gr.Examples(
+                        examples=projected_rows,
+                        inputs=task_input_components[task],
+                        label="",
+                        examples_per_page=max(1, len(projected_rows)),
+                        cache_examples=False,
+                    )
                     # NOTE: Upstream's 8 ``video-editing-demo-*.mp4`` + the
                     # ``multi-turn-editing-demo-01.mp4`` filmstrip are merged
                     # into the runnable examples list above via
@@ -1540,7 +1572,7 @@ def build_ui(
 * **Image to Video**: upload first frame + describe motion; for subtle facial expressions try CFG 10-15
 * **Image Edit**: upload image + describe the edit; outputs a new image
 * **Video Edit**: upload video + describe the edit; outputs a modified video
-* **Understanding tasks**: upload media; outputs caption text""")
+* **Understanding tasks**: upload media, edit the question in the prompt if needed; outputs caption text""")
 
         # ─────────────── UI logic ───────────────
 
@@ -1559,29 +1591,35 @@ def build_ui(
             is_video_task = task in {"t2v", "i2v", "video_edit"}
             is_image_task = task in {"t2i", "image_edit"}
             is_understanding = task in {"x2t_image", "x2t_video"}
-            # Understanding tasks don't need a prompt — system prompt handles
-            # captioning. Generation/edit tasks need a prompt.
-            need_text = not is_understanding
+            # Show prompt for understanding too: VQA uses it, and ``gr.Examples`` must
+            # update visible inputs together or the main ``Video`` may not receive the file.
+            need_text = True
             need_image = task in {"i2v", "image_edit", "x2t_image"}
             need_video = task in {"video_edit", "x2t_video"}
             default_ar = DEFAULT_VIDEO_AR if (is_video_task or is_understanding) else DEFAULT_IMAGE_AR
             w, h = get_size_for_task(task, default_ar, DEFAULT_VIDEO_RES)
+            # ``visible="hidden"`` removes the block from layout (unlike ``False``),
+            # which avoids empty grey strips for inputs/outputs that do not apply.
+            def _vis(on: bool) -> bool | str:
+                return True if on else "hidden"
+
             base = [
-                gr.update(visible=need_text),  # prompt_in
-                gr.update(visible=need_image, value=None),  # image_in
-                gr.update(visible=need_video, value=None),  # video_in
-                gr.update(value=default_ar, visible=False),  # aspect (always hidden, auto-detected)
-                gr.update(visible=is_video_task, value=DEFAULT_VIDEO_RES),  # resolution
+                gr.update(visible=_vis(need_text)),  # prompt_in
+                gr.update(visible=_vis(need_image), value=None),  # image_in
+                gr.update(visible=_vis(need_video)),  # video_input_row
+                gr.update(value=None),  # video_in (clear only; keep visible=True for Examples)
+                gr.update(value=default_ar, visible="hidden"),  # aspect (layout-hidden, auto-detected)
+                gr.update(visible=_vis(is_video_task), value=DEFAULT_VIDEO_RES),  # resolution
                 gr.update(
-                    visible=is_video_task,
+                    visible=_vis(is_video_task),
                     value=DURATION_DEFAULT_PER_TASK.get(task, DEFAULT_VIDEO_DURATION_SEC),
                 ),  # duration — matches upstream's per-script num_frames default
                 gr.update(value=_format_size_md(task, w, h)),  # size_md
-                gr.update(visible=is_image_task and not is_video_task),  # image_out (only show for image-gen tasks)
-                gr.update(visible=is_video_task),  # video_out
-                gr.update(visible=is_understanding),  # text_out
+                gr.update(visible=_vis(is_image_task and not is_video_task)),  # image_out
+                gr.update(visible=_vis(is_video_task)),  # video_out
+                gr.update(visible=_vis(is_understanding)),  # text_out
             ]
-            return base + [gr.update(visible=(t == task)) for t in _example_task_order]
+            return base + [gr.update(visible=(True if t == task else "hidden")) for t in _example_task_order]
 
         task_radio.change(
             on_task,
@@ -1589,6 +1627,7 @@ def build_ui(
             [
                 prompt_in,
                 image_in,
+                video_input_row,
                 video_in,
                 aspect_in,
                 resolution_in,
@@ -1637,7 +1676,7 @@ def build_ui(
 
         def _auto_aspect_from_video(task_label, vid_path):
             task = LABEL_TO_TASK[task_label]
-            if task != "video_edit" or not vid_path:
+            if task not in {"video_edit", "x2t_video"} or not vid_path:
                 return gr.update(), gr.update()
             try:
                 import imageio.v3 as _iio
@@ -1726,16 +1765,30 @@ def main():
     # Whitelist the upstream checkout so gr.Examples can stage media that
     # lives outside the gradio working dir / temp.  Without this, clicks
     # raise ``InvalidPathError`` and the example silently fails to load.
-    launch_kwargs: dict = dict(server_name=args.host, server_port=args.port, share=args.share)
+    launch_kwargs: dict = dict(
+        server_name=args.host,
+        server_port=args.port,
+        share=args.share,
+        css=APP_CSS,
+    )
     allowed = []
     if args.examples_root and Path(args.examples_root).is_dir():
         allowed.append(str(Path(args.examples_root).resolve()))
     i2v_assets = _curated_i2v_assets_dir()
     if i2v_assets is not None:
         allowed.append(str(i2v_assets.resolve()))
+    video_edit_assets = _curated_video_edit_assets_dir()
+    if video_edit_assets is not None:
+        allowed.append(str(video_edit_assets.resolve()))
+    image_edit_assets = _curated_image_edit_assets_dir()
+    if image_edit_assets is not None:
+        allowed.append(str(image_edit_assets.resolve()))
     x2t_video_assets = _curated_x2t_video_assets_dir()
     if x2t_video_assets is not None:
         allowed.append(str(x2t_video_assets.resolve()))
+    x2t_image_assets = _curated_x2t_image_assets_dir()
+    if x2t_image_assets is not None:
+        allowed.append(str(x2t_image_assets.resolve()))
     # ``_extract_demo_sources`` caches cropped video-editing demo sources under
     # ``/tmp/lance_demo_sources`` so they survive across launches; whitelist it
     # too or the click-to-load will hit ``InvalidPathError``.
